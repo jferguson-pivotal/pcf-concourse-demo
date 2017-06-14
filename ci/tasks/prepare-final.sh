@@ -9,10 +9,6 @@ inputManifest=  # optional
 artifactId=  # optional
 packaging= # optional
 
-#
-hostnameAWS=$CF_MANIFEST_HOST_AWS # default to env variable from pipeline
-hostnameGCP=$CF_MANIFEST_HOST_GCP # default to env variable from pipeline
-hostnameAzure=$CF_MANIFEST_HOST_AZURE # default to env variable from pipeline
 
 while [ $# -gt 0 ]; do
   case $1 in
@@ -84,62 +80,6 @@ outputWar="${outputDir}/${baseName}.war"
 echo "Renaming ${inputWar} to ${outputWar}"
 
 cp ${inputWar} ${outputWar}
-
-#AWS
-# copy the manifest to the output directory and process it
-echo "AWS Host: "$hostnameAWS
-outputDirAWS=$outputDir/aws
-mkdir $outputDir/aws
-outputAWSManifest=$outputDirAWS/manifest.yml
-
-cp ${outputWar} ${outputDirAWS}
-
-cp $inputManifest $outputAWSManifest
-
-# the path in the manifest is always relative to the manifest itself
-sed -i -- "s|path: .*$|path: ${baseName}.war|g" $outputAWSManifest
-
-
-sed -i "s|host: .*$|host: $hostnameAWS|g" $outputAWSManifest
-
-#GCP
-# copy the manifest to the output directory and process it
-echo "GCP Host: "$hostnameGCP
-outputDirGCP=$outputDir/gcp
-mkdir $outputDirGCP
-outputGCPManifest=$outputDirGCP/manifest.yml
-
-cp ${outputWar} ${outputDirGCP}
-
-cp $inputManifest $outputGCPManifest
-
-# the path in the manifest is always relative to the manifest itself
-sed -i -- "s|path: .*$|path: ${baseName}.war|g" $outputGCPManifest
-
-
-sed -i "s|host: .*$|host: $hostnameGCP|g" $outputGCPManifest
-
-#Azure
-# copy the manifest to the output directory and process it
-echo "Azure Host: "$hostnameAzure
-outputDirAzure=$outputDir/azure
-mkdir $outputDir/azure
-outputAzureManifest=$outputDirAzure/manifest.yml
-
-cp ${outputWar} ${outputDirAzure}
-
-cp $inputManifest $outputAzureManifest
-
-# the path in the manifest is always relative to the manifest itself
-sed -i -- "s|path: .*$|path: ${baseName}.war|g" $outputAzureManifest
-
-
-sed -i "s|host: .*$|host: $hostnameAzure|g" $outputAzureManifest
-
-
-cat $outputAWSManifest
-cat $outputAzureManifest
-cat $outputGCPManifest
 
 echo "Finished"
 

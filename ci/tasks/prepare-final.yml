@@ -7,10 +7,6 @@ image_resource:
     repository: java
     tag: '8'
 
-params:
-  CF_MANIFEST_HOST_AWS:
-  CF_MANIFEST_HOST_GCP:
-  CF_MANIFEST_HOST_AZURE:
 
 inputs:
   - name: pcfdemo

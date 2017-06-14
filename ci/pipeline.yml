@@ -136,10 +136,6 @@ jobs:
         params: { bump: final }
       - task: prepare-final
         file: pcfdemo/ci/tasks/prepare-final.yml
-        params:
-          CF_MANIFEST_HOST_AWS: {{cf-manifest-host-prod-aws}} 
-          CF_MANIFEST_HOST_GCP: {{cf-manifest-host-prod-gcp}} 
-          CF_MANIFEST_HOST_AZURE: {{cf-manifest-host-prod-azure}}
       - put: final-release
         params: { file: prepare-final/pcf-demo-*.war }
       - put: version
@@ -156,7 +152,7 @@ jobs:
       - get: version
         passed: [ship-it]
       - task: prepare-aws
-        file: pcfdemo/ci/tasks/prepare-cf.yml
+        file: pcfdemo/ci/tasks/prepare-aws.yml
         params:
           CF_MANIFEST_HOST_TARGET: {{cf-manifest-host-prod-aws}} 
       - put: cf-prod-aws
