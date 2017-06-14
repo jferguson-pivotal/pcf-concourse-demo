@@ -87,7 +87,7 @@ cp ${inputWar} ${outputWar}
 echo "Host Name: "$hostname
 outputManifest=$outputDir/manifest.yml
 cp $inputManifest $outputManifest
-
+echo $hostname
 # the path in the manifest is always relative to the manifest itself
 sed -i -- "s|path: .*$|path: ${baseName}.war|g" $outputManifest
 sed -i "s|host: .*$|host: $hostname|g" $outputManifest
