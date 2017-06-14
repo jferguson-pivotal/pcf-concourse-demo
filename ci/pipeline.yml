@@ -156,12 +156,12 @@ jobs:
       - get: version
         passed: [ship-it]
       - task: prepare-aws
-        file: pcfdemo/ci/tasks/prepare-aws.yml
+        file: pcfdemo/ci/tasks/prepare-cf.yml
         params:
-          CF_MANIFEST_HOST_AWS: {{cf-manifest-host-prod-aws}} 
+          CF_MANIFEST_HOST_TARGET: {{cf-manifest-host-prod-aws}} 
       - put: cf-prod-aws
         params:
-          manifest: prepare-aws/aws/manifest.yml 
+          manifest: prepare-aws/manifest.yml 
 
   - name: prepare-gcp
     serial: true
