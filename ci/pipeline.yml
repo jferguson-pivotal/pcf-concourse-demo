@@ -157,7 +157,7 @@ jobs:
           CF_MANIFEST_HOST_TARGET: {{cf-manifest-host-prod-aws}} 
       - put: cf-prod-aws
         params:
-          manifest: prepare-aws/manifest.yml 
+          manifest: prepare-aws/aws/manifest.yml 
 
   - name: prepare-gcp
     serial: true
