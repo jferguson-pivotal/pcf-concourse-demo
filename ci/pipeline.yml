@@ -154,7 +154,7 @@ jobs:
       - task: prepare-aws
         file: pcfdemo/ci/tasks/prepare-aws.yml
         params:
-          CF_MANIFEST_HOST_TARGET: {{cf-manifest-host-prod-aws}} 
+          CF_MANIFEST_HOST_AWS: {{cf-manifest-host-prod-aws}} 
       - put: cf-prod-aws
         params:
           manifest: prepare-aws/aws/manifest.yml 
